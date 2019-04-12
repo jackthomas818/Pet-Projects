@@ -12,6 +12,13 @@ knitr::opts_chunk$set(echo = TRUE)
 Trying out 2D first
 
 ```{r algorithm}
+#Simple function
+
+f <- function(x){
+  return(x^2)
+}
+
+curve(f(x),-5,5)
 
 swarm <- function(lower, upper,omega,phiP,phiG,f){
   
@@ -32,8 +39,8 @@ swarm <- function(lower, upper,omega,phiP,phiG,f){
   }
   
   
-  
 }
+
 
 
 ```
