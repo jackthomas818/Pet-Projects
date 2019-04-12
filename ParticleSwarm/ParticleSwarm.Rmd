@@ -96,6 +96,16 @@ swarm(10,-2,4,.5,.5,.5)
 
 ```{r nd algorithm}
 
+x <- matrix(0,nrow = 2,ncol = 10) 
+lower <- c(-1,-1)
+upper <- c(1,1)
+for (i in 1:10){
+  for (k in 1:2){
+    x[k,i] <- runif(1,lower[k],upper[k])
+  }
+}
+print(x)
+
 ## have to implement lower and upper handling (they are vectors)
 ## initializing positions given lower vector and upper vector (for loop?)
 
@@ -112,7 +122,10 @@ swarm <- function(S,n,lower, upper,omega,phiP,phiG){
   #for each particle i 
   for (i in 1:S){
     #initial position
-    x[,i] <- runif(n,lower,upper)
+    for (k in 1:n){
+      x[k,i] <- runif(1,lower[k],upper[k])
+    }
+    
     p[,i] <- x[,i]
     
     if(f(p[,i]) < f(best_swarm)){
@@ -120,7 +133,9 @@ swarm <- function(S,n,lower, upper,omega,phiP,phiG){
     }
     
     #initial velocity
-    v[,i] <- runif(n,-abs(upper-lower),abs(upper-lower))
+    for (k in 1:n){
+      v[k,i] <- runif(1,-abs(upper[k]-lower[k]),abs(upper[k]-lower[k]))
+    }
   }
   #print(x)
   #print(p)
