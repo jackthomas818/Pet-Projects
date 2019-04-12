@@ -13,12 +13,23 @@ Trying out 2D first
 
 ```{r algorithm}
 
-swarm <- function(lower, upper,omega,phiP,phiG){
+swarm <- function(lower, upper,omega,phiP,phiG,f){
   
-  #initial position
-  xi <- runif(lower,upper)
-  best <- xi
+  best_swarm <- lower
   
+  #for each particle i 
+  for (i in 1:S){
+    #initial position
+    x[i] <- runif(1,lower,upper)
+    p[i] <- xi
+    
+    if(f(p[i]) < f(best_swarm)){
+      best_swarm <- p[i]
+    }
+    
+    #initial velocity
+    v[i] <- runif(1,-abs(upper-lower),abs(upper-lower))
+  }
   
   
   
