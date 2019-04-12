@@ -153,24 +153,30 @@ swarm_nd <- function(S,n,lower, upper,omega,phiP,phiG){
         }
       }
     }
-    #if((j%%2 == 0 && j < 20) || j == 1){
-    #  curve(f,lower,upper,main = c("iteration ",j))
-    #  points(x,f(x))
-    #}
-    
+
   }
   cat("best x,y value: ",best_swarm,"\n")
   cat(2*best_swarm[1]^2 + 4*best_swarm[2]^2,"\n")
   cat("minimum: ",f(best_swarm),"\n")
   cat("\n")
+  return(best_swarm)
 }
 
+f <- function(x,y){
+  return((4 - x^2 - 2*y^2)^2)
+}
+x <- seq(-4,4,length = 30)
+y <- seq(-100,100,length = 30)
+z <- outer(x,y,f)
+op <- par(bg= 'white')
+persp(x, y, z, theta = 30, phi = 35, expand = 0.3, col = "lightblue")
 
 f <- function(x){
   return((4 - x[1]^2 - 2*x[2]^2)^2)
 }
+best_swarm <- swarm_nd(100,2,c(-4,-4),c(4,100),.01,.01,.01)
 
-swarm_nd(100,2,c(-4,-4),c(4,100),.01,.01,.01)
+
 ```
 
 
