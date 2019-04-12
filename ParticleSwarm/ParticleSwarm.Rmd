@@ -96,20 +96,19 @@ swarm(10,-2,4,.5,.5,.5)
 
 ```{r nd algorithm}
 
-x <- matrix(0,nrow = 2,ncol = 10) 
-lower <- c(-1,-1)
-upper <- c(1,1)
-for (i in 1:10){
-  for (k in 1:2){
-    x[k,i] <- runif(1,lower[k],upper[k])
-  }
-}
-print(x)
+#x <- matrix(0,nrow = 2,ncol = 10) 
+#lower <- c(-1,-1)
+#upper <- c(1,1)
+#for (i in 1:10){
+#  for (k in 1:2){
+#    x[k,i] <- runif(1,lower[k],upper[k])
+#  }
+#}
+#print(x)
 
-## have to implement lower and upper handling (they are vectors)
-## initializing positions given lower vector and upper vector (for loop?)
+## Need to fix function handling with vectors in f()
 
-swarm <- function(S,n,lower, upper,omega,phiP,phiG){
+swarm_nd <- function(S,n,lower, upper,omega,phiP,phiG){
   iterations <- 100
   best_swarm <- lower
   #particle positions
@@ -177,9 +176,11 @@ swarm <- function(S,n,lower, upper,omega,phiP,phiG){
 }
 
 
-f <- function(x,y){
-  return(x^2 )
+f <- function(x){
+  return(x[1]^2-x[2]^2)
 }
+
+swarm_nd(10,1,c(-4,-4),c(4,4),.5,.5,.5)
 ```
 
 
