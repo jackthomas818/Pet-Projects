@@ -96,15 +96,12 @@ swarm(10,-2,4,.5,.5,.5)
 
 ```{r nd algorithm}
 
-x <- matrix(c(1,2,3,4,5,6,7,8,9),nrow = 2,ncol = 10) 
-print(x)
-print(x[,1])
-x[,1] = runif(2,-4,4)
-print(x)
+## have to implement lower and upper handling (they are vectors)
+## initializing positions given lower vector and upper vector (for loop?)
 
 swarm <- function(S,n,lower, upper,omega,phiP,phiG){
   iterations <- 100
-  best_swarm <- c(lower,lower)
+  best_swarm <- lower
   #particle positions
   x <- matrix(0,nrow = n,ncol = S) 
   #particle best positions
@@ -132,19 +129,24 @@ swarm <- function(S,n,lower, upper,omega,phiP,phiG){
   for(j in 1:iterations){
     
     for (i in 1:S){
-      rp <- runif(1,0,1)
-      rg <- runif(1,0,1)
       
-      v[i] <- omega*v[i] + phiP*rp*(p[i]-x[i]) + phiG*rg*(best_swarm-x[i])
+      for (d in 1:n){
+        rp <- runif(1,0,1)
+        rg <- runif(1,0,1)
       
-      x[i] <- x[i] + v[i]
+        v[,i] <- omega*v[,i] + phiP*rp*(p[,i]-x[,i]) + phiG*rg*(best_swarm-x[,i])
+        
+      }
       
-      if (f(x[i]) < f(p[i])){
-        p[i] <- x[i]
+      
+      x[,i] <- x[,i] + v[,i]
+      
+      if (f(x[,i]) < f(p[,i])){
+        p[,i] <- x[,i]
         
         #update best position in the swarm
-        if (f(p[i]) < f(best_swarm)){
-          best_swarm <- p[i]
+        if (f(p[,i]) < f(best_swarm)){
+          best_swarm <- p[,i]
         }
       }
     }
@@ -159,6 +161,10 @@ swarm <- function(S,n,lower, upper,omega,phiP,phiG){
   cat("\n")
 }
 
+
+f <- function(x,y){
+  return(x^2 )
+}
 ```
 
 
