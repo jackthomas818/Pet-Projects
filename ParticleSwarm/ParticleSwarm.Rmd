@@ -67,7 +67,7 @@ swarm <- function(S,lower, upper,omega,phiP,phiG){
         }
       }
     }
-    if(j%%2 == 0 && j < 25){
+    if(j%%2 == 0 && j < 20){
       curve(f,lower,upper)
       points(x,f(x))
     }
