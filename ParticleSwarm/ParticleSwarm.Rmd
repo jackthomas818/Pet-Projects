@@ -2,7 +2,10 @@
 title: "Particle Swarm Optimizer"
 author: "Jack Thomas"
 date: "April 11, 2019"
-output: html_document
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -22,7 +25,6 @@ f <- function(x){
 curve(f(x),-5,5)
 
 swarm <- function(S,lower, upper,omega,phiP,phiG){
-  
   best_swarm <- lower
   #particle positions
   x <- rep(0,S)
