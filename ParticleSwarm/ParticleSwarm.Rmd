@@ -71,6 +71,7 @@ swarm <- function(S,lower, upper,omega,phiP,phiG){
       curve(f,lower,upper)
       points(x,f(x))
     }
+    
   }
   cat("best x value: ",best_swarm,"\n")
   cat("minimum: ",f(best_swarm),"\n")
@@ -85,7 +86,7 @@ f <- function(x){
 }
 curve(f,-2,4)
 
-swarm(10,-1,4,.5,.5,.5)
+swarm(10,-2,4,.5,.5,.5)
 
 ```
 
