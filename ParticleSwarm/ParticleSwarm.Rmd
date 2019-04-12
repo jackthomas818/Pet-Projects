@@ -70,7 +70,7 @@ swarm <- function(S,lower, upper,omega,phiP,phiG){
       }
     }
     if(j%%2 == 0 && j < 20){
-      curve(f,lower,upper)
+      curve(f,lower,upper,main = c("iteration ",j))
       points(x,f(x))
     }
     
