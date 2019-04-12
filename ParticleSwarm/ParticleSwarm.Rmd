@@ -66,12 +66,15 @@ swarm <- function(S,lower, upper,omega,phiP,phiG){
           best_swarm <- p[i]
         }
       }
-    
+    }
+    if(j%%2 == 0 && j < 25){
+      curve(f,lower,upper)
+      points(x,f(x))
     }
   }
   cat("best x value: ",best_swarm,"\n")
-  cat("minimum: ",f(best_swarm))
-  
+  cat("minimum: ",f(best_swarm),"\n")
+  cat("\n")
 }
 
 swarm(10,-4,4,.5,.5,.5)
@@ -80,6 +83,9 @@ swarm(10,-4,4,.5,.5,.5)
 f <- function(x){
   return(x^3 - 9*x)
 }
+curve(f,-2,4)
+
+swarm(10,-1,4,.5,.5,.5)
 
 ```
 
