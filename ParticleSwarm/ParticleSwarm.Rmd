@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Trying out 2D first
 
 ```{r algorithm}
+set.seed(123)
 #Simple function
 
 f <- function(x){
@@ -20,15 +21,21 @@ f <- function(x){
 
 curve(f(x),-5,5)
 
-swarm <- function(lower, upper,omega,phiP,phiG,f){
+swarm <- function(S,lower, upper,omega,phiP,phiG){
   
   best_swarm <- lower
+  #particle positions
+  x <- rep(0,S)
+  #particle best positions
+  p <- rep(0,S)
+  #particle velocities
+  v <- rep(0,S)
   
   #for each particle i 
   for (i in 1:S){
     #initial position
     x[i] <- runif(1,lower,upper)
-    p[i] <- xi
+    p[i] <- x[i]
     
     if(f(p[i]) < f(best_swarm)){
       best_swarm <- p[i]
@@ -37,10 +44,54 @@ swarm <- function(lower, upper,omega,phiP,phiG,f){
     #initial velocity
     v[i] <- runif(1,-abs(upper-lower),abs(upper-lower))
   }
-  
+  #print(x)
+  #print(p)
+  #print(v)
+  #print(best_swarm)
+  for(j in 1:100){
+    
+    for (i in 1:S){
+      rp <- runif(1,0,1)
+      rg <- runif(1,0,1)
+      
+      v[i] <- omega*v[i] + phiP*rp*(p[i]-x[i]) + phiG*rg*(best_swarm-x[i])
+      
+      x[i] <- x[i] + v[i]
+      
+      if (f(x[i]) < f(p[i])){
+        p[i] <- x[i]
+        
+        #update best position in the swarm
+        if (f(p[i]) < f(best_swarm)){
+          best_swarm <- p[i]
+        }
+      }
+    
+    }
+  }
+  cat("best x value: ",best_swarm,"\n")
+  cat("minimum: ",f(best_swarm))
   
 }
 
+swarm(10,-4,4,.5,.5,.5)
 
+#more complex function
+f <- function(x){
+  return(x^3 - 9*x)
+}
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
