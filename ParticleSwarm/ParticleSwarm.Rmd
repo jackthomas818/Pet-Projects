@@ -17,21 +17,24 @@ Trying out 2D first
 ```{r algorithm}
 set.seed(123)
 #Simple function
-
+x <- matrix(0,nrow = 2, ncol = 10 )
+print(x)
+print(x[1])
 f <- function(x){
   return(x^2)
 }
 
 curve(f(x),-5,5)
 
-swarm <- function(S,lower, upper,omega,phiP,phiG){
+swarm <- function(S,n,lower, upper,omega,phiP,phiG){
+  iterations <- 100
   best_swarm <- lower
   #particle positions
-  x <- rep(0,S)
+  x <- matrix(0,nrow = n,ncol = S) 
   #particle best positions
-  p <- rep(0,S)
+  p <- matrix(0,nrow = n,ncol = S) 
   #particle velocities
-  v <- rep(0,S)
+  v <- matrix(0,nrow = n,ncol = S) 
   
   #for each particle i 
   for (i in 1:S){
@@ -50,7 +53,7 @@ swarm <- function(S,lower, upper,omega,phiP,phiG){
   #print(p)
   #print(v)
   #print(best_swarm)
-  for(j in 1:100){
+  for(j in 1:iterations){
     
     for (i in 1:S){
       rp <- runif(1,0,1)
